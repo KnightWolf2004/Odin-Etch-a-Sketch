@@ -1,18 +1,20 @@
 const workspace = document.querySelector(".workspace");
 
-
-for (let i = 0; i < 16; i++) {
-    const row = document.createElement("div");
-    row.classList.add("row");
-    row.classList.add("canvas");
-    for (let j = 0; j < 16; j++) {
-        const col = document.createElement("div");
-        col.classList.add("column");
-        col.classList.add("canvas");
-        col.id = [String(i) + ' ' + String(j)];
-        row.appendChild(col);
+function makenewcanvas(size = 16) {
+    workspace.replaceChildren();
+    for (let i = 0; i < size; i++) {
+        const row = document.createElement("div");
+        row.classList.add("row");
+        row.classList.add("canvas");
+        for (let j = 0; j < size; j++) {
+            const col = document.createElement("div");
+            col.classList.add("column");
+            col.classList.add("canvas");
+            col.id = [String(i) + ' ' + String(j)];
+            row.appendChild(col);
+        }
+        workspace.appendChild(row);
     }
-    workspace.appendChild(row);
 }
 
 workspace.addEventListener("mouseover", (event) => {
@@ -32,3 +34,24 @@ workspace.addEventListener("mouseover", (event) => {
         }
     }
 });
+
+const button = document.querySelector("button");
+const input = document.querySelector("input");
+
+input.addEventListener("click", () => {
+    let msg = document.querySelector(".invalid-input");
+    msg.textContent = "Enter a number between 4 and 100";
+});
+
+button.addEventListener("click", () => {
+    if (Number(input.value) >= 4 && Number(input.value) <= 100) {
+        let msg = document.querySelector(".invalid-input");
+        msg.textContent = "";
+        makenewcanvas(Number(input.value));
+    } else {
+        let msg = document.querySelector(".invalid-input");
+        msg.textContent = "Please enter a valid number between 4 and 100";
+    }
+});
+
+makenewcanvas();
