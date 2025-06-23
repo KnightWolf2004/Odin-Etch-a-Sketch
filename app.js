@@ -3,43 +3,41 @@ const button = document.querySelector(".submit");
 const input = document.querySelector("input");
 const clear = document.querySelector(".clear");
 
+//Make a new canvas on opening the site the first time and when user inputs a value
 function makenewcanvas(size = 16) {
     workspace.replaceChildren();
     for (let i = 0; i < size; i++) {
         const row = document.createElement("div");
         row.classList.add("row");
-        // row.classList.add("canvas");
         for (let j = 0; j < size; j++) {
             const col = document.createElement("div");
             col.classList.add("column");
-            // col.classList.add("canvas");
-            col.id = [String(i) + ' ' + String(j)];
             row.appendChild(col);
         }
         workspace.appendChild(row);
     }
 }
 
+//Logic for coloring the div squares when mouse enters them
+//if it is a new square-> give it a random color and opacity of 0.1 and add class 'visited'
+//if it is previously visited-> increase opacity by 0.1
 workspace.addEventListener("mouseover", (event) => {
-    let target = event.target.id;
-    // console.log(target);
-    if (target.length > 0) {
-        const block = document.getElementById(target);
-        // console.log(block.style.cssText.length);
-        if (block.style.cssText.length === 0) {
-            block.setAttribute("style", `background: rgba(${Math.random() * (256 - 0) + 0},${Math.random() * (256 - 0) + 0},${Math.random() * (256 - 0) + 0}); opacity:0.1`);
+    const block = event.target;
+    if (block.classList.contains("column")) {
+        if (!block.classList.contains("visited")) {
+            block.style.background = `rgba(${Math.random() * 256},${Math.random() * 256},${Math.random() * 256})`;
+            block.style.opacity = 0.1;
             block.classList.add("visited");
         } else {
-            // console.log(block.style.opacity);
-            const opacityval = Number(block.style.opacity);
-            if (opacityval < 1) {
-                block.style.opacity = opacityval + 0.1;
+            let opacityVal = parseFloat(block.style.opacity);
+            if (opacityVal < 1) {
+                block.style.opacity = opacityVal + 0.1;
             }
         }
     }
 });
 
-
+//Will update the content of class 'sqaure' in real-time according to user input
 input.addEventListener("input", () => {
     let msg = document.querySelector(".invalid-input");
     msg.textContent = "Enter a number between 4 and 100";
@@ -48,6 +46,7 @@ input.addEventListener("input", () => {
     square.textContent = `x ${input.value}`;
 });
 
+//will check if value input by user is correct, then call the makenewcanvas function
 button.addEventListener("click", () => {
     if (Number(input.value) >= 4 && Number(input.value) <= 100) {
         let msg = document.querySelector(".invalid-input");
@@ -59,6 +58,7 @@ button.addEventListener("click", () => {
     }
 });
 
+//will clear the canvas
 clear.addEventListener("click", () => {
     const children = document.querySelectorAll(".visited");
     // console.log(children);
