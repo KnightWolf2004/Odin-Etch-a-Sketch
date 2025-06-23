@@ -38,9 +38,12 @@ workspace.addEventListener("mouseover", (event) => {
 const button = document.querySelector("button");
 const input = document.querySelector("input");
 
-input.addEventListener("click", () => {
+input.addEventListener("input", () => {
     let msg = document.querySelector(".invalid-input");
     msg.textContent = "Enter a number between 4 and 100";
+
+    let square = document.querySelector(".square");
+    square.textContent = `x ${input.value}`;
 });
 
 button.addEventListener("click", () => {
