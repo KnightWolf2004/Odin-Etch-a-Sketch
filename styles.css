@@ -7,8 +7,8 @@
 
 .container .workspace {
     border: solid;
-    border-color: red;
-    background-color: beige;
+    border-color: black;
+    background-color: white;
     width: 20em;
     height: 20em;
     display: flex;
@@ -16,14 +16,13 @@
 }
 
 .row {
-    border: solid;
-    border-color: black;
     display: flex;
     flex: 1;
 }
 
 .column {
     border: solid;
-    border-color: coral;
+    border-color: black;
+    border-width: 1px;
     flex: 1;
 }
