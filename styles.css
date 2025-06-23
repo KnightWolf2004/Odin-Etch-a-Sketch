@@ -1,0 +1,29 @@
+.container {
+    border: solid;
+    border-color: black;
+    justify-content: center;
+    display: flex;
+}
+
+.container .workspace {
+    border: solid;
+    border-color: red;
+    background-color: beige;
+    width: 20em;
+    height: 20em;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    border: solid;
+    border-color: black;
+    display: flex;
+    flex: 1;
+}
+
+.column {
+    border: solid;
+    border-color: coral;
+    flex: 1;
+}
